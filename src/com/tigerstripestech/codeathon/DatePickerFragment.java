@@ -32,7 +32,7 @@ public class DatePickerFragment extends DialogFragment implements
 		// TODO Auto-generated method stub
 		RecordMeal callingActivity = (RecordMeal) getActivity();
 		String date;
-		date = String.format("%02d", year) + String.format("%02d", (monthOfYear+1)) + String.format("%02d", dayOfMonth);
+		date = String.format("%04d", year) + "-" + String.format("%02d", (monthOfYear+1)) + "-" + String.format("%02d", dayOfMonth);
 		callingActivity.onDateSet(date);
 	}
 }

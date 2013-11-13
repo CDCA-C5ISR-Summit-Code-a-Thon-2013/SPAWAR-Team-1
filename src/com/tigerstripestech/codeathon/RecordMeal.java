@@ -1,20 +1,29 @@
 package com.tigerstripestech.codeathon;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tigerstripestech.codeathon.db.MealDbHelper;
 import com.tigerstripestech.codeathon.objects.Food;
@@ -52,9 +61,14 @@ public class RecordMeal extends Activity {
 		ArrayList<Food> allFood = dbHelper.getAllFood();
 		ArrayList<String> meals = new ArrayList<String>();
 		
+		meals.add("-- Select Food --");
+		
 		for(int i=0;i<allFood.size();i++){
 			meals.add(allFood.get(i).getName());
 		}
+		
+		// Add a final option to have a custom food type created
+		meals.add("Other");
 		
 		ArrayAdapter<String> mealAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, meals);
 		
@@ -64,10 +78,15 @@ public class RecordMeal extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				curMeal = (String) parent.getItemAtPosition(pos).toString();
-				Food f = dbHelper.getFoodFromString(curMeal);
-				String fType = f.getTypeString();
-				TextView quantity = (TextView) findViewById(R.id.selectQuantityTextView);
-				quantity.setText("Quantity (in " + fType + "):");
+				if(curMeal.equalsIgnoreCase("Other")){
+					// TODO: Pop up dialog
+				}
+				else{
+					Food f = dbHelper.getFoodFromString(curMeal);
+					String fType = f.getTypeString();
+					TextView quantity = (TextView) findViewById(R.id.selectQuantityTextView);
+					quantity.setText("Quantity (in " + fType + "):");
+				}
 				
 			}
 			@Override
@@ -77,16 +96,79 @@ public class RecordMeal extends Activity {
 	}
 	
 	public void onClickSaveMeal(View v) {
-		//Intent intent = new Intent(this, SaveMeal.class);
-		//startActivity(intent);
+		if(curMeal.equalsIgnoreCase("-- Select Food --")){
+			String title, message;
+			title = "Food Bytes Error";
+			message = "Please select a food";
+			AlertDialog.Builder builder = confirmDialog(title, message);
+			builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+				}
+				});
+			builder.setCancelable(false);
+			AlertDialog dialog = builder.create();
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.show();
+		}
+		else{
 		
-		// TODO: Save meal information logic here
-		finish();
+			// Calculate the timestamp of the recorded intake
+			Button timeView = (Button) findViewById(R.id.btnTime);
+			Button dateView = (Button) findViewById(R.id.btnDate);
+			EditText quantityView = (EditText) findViewById(R.id.editQuantity);
+			int quantity = Integer.parseInt(quantityView.getText().toString());
+			String time = timeView.getText().toString();
+			String date = dateView.getText().toString();
+			int timeStamp = getTimeStamp(time,date);
+			
+			// TODO: Add logic to save the current values before resetting the activity
+			dbHelper.saveNewIntake(timeStamp, curMeal, quantity);
+			Log.d("Codeathon", "Saved Intake with timestamp=" + timeStamp + " foodName=" + curMeal + " quantity=" + quantity);
+			Toast.makeText(getApplicationContext(), "Saved Intake", Toast.LENGTH_LONG).show();
+			finish();
+		}
+	}
+	
+	public int getTimeStamp(String time, String date){
+		int ts = 0;
+		Date myDate = new Date();
+		Calendar c = Calendar.getInstance();
+		
+		// January is month 0 in java date class. add 1 to c.get month
+		SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH) + 1;
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		String input = date + " " + time;
+		try {
+			myDate = dateFormater.parse(input);
+			ts = (int) (myDate.getTime() / 1000);
+			//stringTime = String.valueOf(myTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ts;
 	}
 	
 	public void onClickAddNew(View v) {
+		//TODO: Add logic to save the current values before resetting the activity
+		Button timeView = (Button) findViewById(R.id.btnTime);
+		Button dateView = (Button) findViewById(R.id.btnDate);
+		EditText quantityView = (EditText) findViewById(R.id.editQuantity);
+		int quantity = Integer.parseInt(quantityView.getText().toString());
+		String time = timeView.getText().toString();
+		String date = dateView.getText().toString();
+		int timeStamp = getTimeStamp(time,date);
+		
+		// TODO: Add logic to save the current values before resetting the activity
+		dbHelper.saveNewIntake(timeStamp, curMeal, quantity);
+		Log.d("Codeathon", "Saved Intake with timestamp=" + timeStamp + " foodName=" + curMeal + " quantity=" + quantity);
+		Toast.makeText(getApplicationContext(), "Saved Intake", Toast.LENGTH_LONG).show();
+		
 		Intent intent = new Intent(this, RecordMeal.class);
 		startActivity(intent);
+		finish();
 	}
 	
 	public void showTimePickerDialog(View v) {
@@ -138,6 +220,17 @@ public class RecordMeal extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private AlertDialog.Builder confirmDialog(String title, String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(title);
+		builder.setMessage(message);
+		builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+		builder.setCancelable(false);
+		return builder;
+		
 	}
 
 }
