@@ -42,25 +42,21 @@ public class CalendarActivity extends Activity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                     int dayOfMonth) {
-            	View popUpView = getLayoutInflater().inflate(R.layout.popup, null); // inflating popup layout
-            	TextView popUpTvDate = (TextView) popUpView.findViewById(R.id.popUpDate);
-            	TextView popUpTvCalories = (TextView) popUpView.findViewById(R.id.popUpCalories);
+            	
+            	TextView focusTvDate = (TextView) findViewById(R.id.focusDate);
+            	TextView focusTvCalories = (TextView) findViewById(R.id.focusCalories);
             	
             	//Format the date for display
             	GregorianCalendar date = new GregorianCalendar(year, month, dayOfMonth);
             	format.setCalendar(date);
-            	popUpTvDate.setText(format.format(date.getTime()));
+            	focusTvDate.setText(format.format(date.getTime()));
             	
             	//Get the date to send as a parameter
             	final int finalDate = (int)date.getTimeInMillis()/1000;
             	
-            	popUpTvCalories.setText(getCalories(year, month, dayOfMonth));
+            	focusTvCalories.setText(getCalories(year, month, dayOfMonth));
             	
-                mpopup = new PopupWindow(popUpView, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true); //Creation of popup
-                mpopup.setAnimationStyle(android.R.style.Animation_Dialog);   
-                mpopup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);    // Displaying popup
-                
-                Button btnDetails = (Button)popUpView.findViewById(R.id.btnDetails);
+                Button btnDetails = (Button) findViewById(R.id.focusDetailsBtn);
                 btnDetails.setOnClickListener(new OnClickListener() 
                 {                    
                     @Override
@@ -77,19 +73,9 @@ public class CalendarActivity extends Activity {
                    		intent.putExtras(extras);
                    		startActivity(intent);
                     	
-                        mpopup.dismiss();  //dismissing the popup
                     }
                 });
                 
-                Button btnCancel = (Button)popUpView.findViewById(R.id.btnCancel);
-                btnCancel.setOnClickListener(new OnClickListener() 
-                {                    
-                    @Override
-                    public void onClick(View v) 
-                    {
-                        mpopup.dismiss(); //dismissing the popup
-                    }
-                });
             
                  
 
