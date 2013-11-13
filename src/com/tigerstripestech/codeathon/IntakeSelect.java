@@ -3,6 +3,7 @@ package com.tigerstripestech.codeathon;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -40,6 +41,7 @@ public class IntakeSelect extends Activity {
 
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	private void generateIntake(int day){	
 		
 		MealDbHelper dbHelper = App.getDbHelper();
@@ -67,10 +69,11 @@ public class IntakeSelect extends Activity {
 					Calendar cal = Calendar.getInstance();
 					Long milli = (long) (sTime) * 1000;
 					cal.setTimeInMillis(milli);
-					SimpleDateFormat format = new SimpleDateFormat(
-		                       "MMM d yyyy");
-		 
-					tv.setText(format.format((cal.getTime())));
+					SimpleDateFormat format = new SimpleDateFormat("hh:00 a");
+					String curDay = format.format(cal.getTime());
+					cal.add(Calendar.DATE, 1);
+					String nextDay = format.format(cal.getTime());
+					tv.setText(curDay + " - " + nextDay);
 					return true;
 				}
 				
