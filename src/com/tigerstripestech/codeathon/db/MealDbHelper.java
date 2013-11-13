@@ -106,8 +106,8 @@ public class MealDbHelper extends SQLiteOpenHelper{
 				+ "count(*) cnt, sum(calories_per) sum FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
 			    + MealDb.DB_FOOD + " WHERE " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
-			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl GROUP BY hr WHERE hr > " + day
-			    + " AND hr < " + nextDay + " ORDER BY hr;";
+			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl WHERE hr > " + day + " AND hr < " + nextDay 
+			    + " GROUP BY hr ORDER BY hr;";
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -121,7 +121,7 @@ public class MealDbHelper extends SQLiteOpenHelper{
 
 		// Select All Query
 		String selectQuery = "SELECT * FROM " + MealDb.DB_FOOD
-				+ " WHERE " + MealDb.KEY_FOOD_NAME + "=" + foodName;
+				+ " WHERE " + MealDb.KEY_FOOD_NAME + "=\"" + foodName + "\"";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
