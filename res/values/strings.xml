@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">codeathon</string>
+    <string name="app_name">Food Bytes</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="record">Record Meal</string>
+    <string name="calendar">View Calendar</string>
+    <string name="profile">Update Profile</string>
+    <string name="title_activity_record_meal">RecordMeal</string>
+    <string name="selectMeal">Select Meal:</string>
+    <string-array name="meals">
+        <item >Granola Bar</item>
+        <item >MRE Bar</item>
+    </string-array>
 
 </resources>
