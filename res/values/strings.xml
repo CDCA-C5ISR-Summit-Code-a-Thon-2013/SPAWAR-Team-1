@@ -57,4 +57,5 @@
         <item>13</item>
     </string-array>
         <string name="title_activity_profile">Update Profile</string>
+        <string name="finish">Finish &amp; Save</string>
 </resources>
