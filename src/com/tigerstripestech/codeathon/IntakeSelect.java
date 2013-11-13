@@ -90,15 +90,16 @@ public class IntakeSelect extends Activity {
 					int position, long id) {
 				// Get the cursor, positioned to the corresponding row in the result set
 				Cursor cursor = (Cursor) listView.getItemAtPosition(position);
-				
-                //Intent confirmRun = new Intent(getActivity(), RunInfo.class);
+                Intent intent = new Intent(getApplicationContext(), IntakeDetails.class);
+                int sTime = cursor.getInt(cursor.getColumnIndexOrThrow("hr"));
                 
-                //Bundle extras = new Bundle();
-                //extras.putString("date", "tmp");
+                int date = (sTime / 86400) * 86400;
+                Bundle extras = new Bundle();
+                extras.putInt("date", date);
 
-                //confirmRun.putExtras(extras);
-                
-                //startActivityForResult(confirmRun, REQUEST_CODE);
+                intent.putExtras(extras);
+                startActivity(intent);
+                finish();
 				
 			}
 		});

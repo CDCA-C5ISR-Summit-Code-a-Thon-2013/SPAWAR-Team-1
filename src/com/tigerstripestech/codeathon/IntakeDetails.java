@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableLayout.LayoutParams;
 import android.widget.TableRow;
@@ -21,6 +23,7 @@ import com.tigerstripestech.codeathon.db.MealDbHelper;
 public class IntakeDetails extends Activity {
 	private MealDbHelper dbHelper;
 	private TableLayout tl;
+	private Button btnReturn;
 	
 
 	@SuppressLint("SimpleDateFormat")
@@ -29,6 +32,16 @@ public class IntakeDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.intake_details);
 
+		btnReturn = (Button) findViewById(R.id.btnReviewReturn);
+		
+		btnReturn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+				
+			}
+		});
 		dbHelper = App.getDbHelper();
 		int day;
 
@@ -85,8 +98,8 @@ public class IntakeDetails extends Activity {
 			// Add Fourth Column
 			TextView detailCalorie = (TextView) tr.findViewById(R.id.detailRowCalorie);
 			int calorie = Integer.parseInt(value.get("calorie"));
-			detailCalorie.setText(value.get("calorie"));
-			calories+=calorie;
+			detailCalorie.setText(Integer.toString(calorie * count));
+			calories+=calorie * count;
 
 			/* Add row to TableLayout. */
 			tl.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));

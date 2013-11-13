@@ -105,7 +105,8 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		int day = (timestamp / 86400) * 86400;
 		int nextDay = ((timestamp / 86400) + 1) * 86400;
 		String selectQuery = "SELECT _id, ((" + MealDb.KEY_INTAKE_DATE + " / 3600) * 3600) hr,"
-				+ "count(*) cnt, (sum(calories_per) * count(*)) total FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
+				+ "sum(" + MealDb.KEY_INTAKE_COUNT + ") cnt, (sum(calories_per) * sum(" 
+				+ MealDb.KEY_INTAKE_COUNT +  ")) total FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
 			    + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl WHERE hr > " + day + " AND hr < " + nextDay 
