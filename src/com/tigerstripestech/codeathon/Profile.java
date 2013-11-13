@@ -3,14 +3,18 @@ package com.tigerstripestech.codeathon;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Profile extends Activity {
 	
 	Spinner spinMeal;
+	private AppPreferences _appPrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,29 @@ public class Profile extends Activity {
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		_appPrefs = new AppPreferences(getBaseContext());
+		
+		
+	}
+	
+	public void onClickSaveSettings(View v){
+		EditText heightText;
+		EditText weightText;
+		heightText = (EditText)findViewById(R.id.editHeight);
+		weightText = (EditText)findViewById(R.id.editWeight);
+		String height = heightText.getText().toString();
+		String weight = weightText.getText().toString();
+		
+		Log.d("CODEATHON", "Height is: " + height);
+		Log.d("CODEATHON", "Weight is: " + weight);
+		
+		_appPrefs.saveHeight(height);
+		_appPrefs.saveWeight(weight);
+		
+		Toast.makeText(getApplicationContext(), "Saved Settings", Toast.LENGTH_LONG).show();
+		
+		finish();
 		
 	}
 
