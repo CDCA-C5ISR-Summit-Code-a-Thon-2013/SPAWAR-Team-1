@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:id="@+id/event_buttons"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_shadow" >
+        
+        <RelativeLayout
+	        android:id="@+id/left_block"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:gravity="center" >
+		    <TextView
+		        android:id="@+id/intake_count"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:text="88"
+		        android:textSize="28sp"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    </RelativeLayout>
+	    
+	    <LinearLayout 
+	        android:id="@+id/divider_left"
+    		android:layout_width="10dip"
+    		android:layout_height="match_parent"
+    		android:orientation="vertical" >
+	        
+	        <View
+			    android:layout_width="1dip"
+			    android:layout_height="15dp"
+			    android:layout_weight="1" />
+		    <View
+			    android:layout_width="1dip"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="2"
+			    android:background="#555555" />
+		    <View
+			    android:layout_width="1dip"
+			    android:layout_height="15dp"
+			    android:layout_weight="1" />
+	    
+	    </LinearLayout>
+
+	    <RelativeLayout
+	        android:id="@+id/middle_block"
+	        android:layout_width="0dp"
+	        android:layout_weight="2.25"
+	        android:layout_height="match_parent"
+	        android:gravity="center_vertical"
+	        android:orientation="vertical" >
+
+		    <TextView
+	            android:id="@+id/intake_date"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_centerInParent="true"
+	            android:layout_centerVertical="true"
+	            android:text="TASK NAME"
+	            android:textSize="20sp"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    </RelativeLayout>
+	    
+	    
+	    <LinearLayout 
+	        android:id="@+id/divider_right"
+    		android:layout_width="10dip"
+    		android:layout_height="match_parent"
+    		android:paddingLeft="5dp"
+    		android:orientation="vertical" >
+	        
+	        <View
+			    android:layout_width="1dip"
+			    android:layout_height="15dp"
+			    android:layout_weight="1" />
+		    <View
+			    android:layout_width="1dip"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="2"
+			    android:background="#555555" />
+		    <View
+			    android:layout_width="1dip"
+			    android:layout_height="15dp"
+			    android:layout_weight="1" />
+	    
+	    </LinearLayout>
+	    
+	    <RelativeLayout
+	        android:id="@+id/right_block"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="match_parent"
+	        android:gravity="center" >
+		    <TextView
+		        android:id="@+id/calorie_count"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:paddingRight="5dp"
+		        android:text="Team NAME"
+		        android:textSize="16sp"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    </RelativeLayout>
+
+    
+    </LinearLayout>
+</LinearLayout>

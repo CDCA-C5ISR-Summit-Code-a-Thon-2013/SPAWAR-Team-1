@@ -56,5 +56,35 @@
         <item>14</item>
         <item>13</item>
     </string-array>
+	<string-array name="intake_time_array">
+        <item>1384365137</item>
+        <item>1384365137</item>
+        <item>1384368724</item>
+        <item>1384282324</item>
+        <item>1384281004</item>
+        <item>1384281004</item>
+        <item>1384281004</item>
+        <item>1384281604</item>
+    </string-array>
+    <string-array name="intake_food_array">
+        <item>11</item>
+        <item>10</item>
+        <item>8</item>
+        <item>8</item>
+        <item>3</item>
+        <item>2</item>
+        <item>5</item>
+        <item>4</item>
+    </string-array>
+        <string-array name="intake_quantity_array">
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+        <item>4</item>
+        <item>6</item>
+        <item>4</item>
+    </string-array>
         <string name="title_activity_profile">Update Profile</string>
 </resources>
