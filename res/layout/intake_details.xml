@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded"
+        android:orientation="vertical"
+        android:padding="6dip" >
+
+        <TextView
+            android:id="@+id/details_date"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Date"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/detailsTable"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/black"
+        android:stretchColumns="1" >
+
+        <TableRow>
+
+            <TextView
+                style="@style/TableHeader"
+                android:text="Time" />
+
+            <TextView
+                style="@style/TableHeader"
+                android:text="Intake" />
+
+            <TextView
+                style="@style/TableHeader"
+                android:text="Calories" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/black"
+        android:stretchColumns="1" >
+
+        <TableRow>
+
+            <TextView
+                style="@style/TableHeader"
+                android:text="Intake Consumed" />
+
+            <TextView
+                style="@style/TableHeader"
+                android:text="Total Calories" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/detailsIntakeCount"
+                style="@style/TableRow"
+                android:text="3" />
+
+            <TextView
+                android:id="@+id/detailsCalories"
+                style="@style/TableRow"
+                android:text="3" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btnReviewReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_shadow"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Return"
+        android:textSize="14sp" />
+
+</LinearLayout>

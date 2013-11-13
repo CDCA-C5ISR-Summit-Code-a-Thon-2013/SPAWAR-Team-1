@@ -1,6 +1,8 @@
 package com.tigerstripestech.codeathon.db;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -178,6 +180,44 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		cursor.close();
 		
 		return calories;
+	}
+	
+	public ArrayList<HashMap<String, String>> getFoodFromDay(int timestamp) {
+		ArrayList<HashMap<String, String>> values = new ArrayList<HashMap<String, String>>();
+		int day = (timestamp / 86400) * 86400;
+		int nextDay = ((timestamp / 86400) + 1) * 86400;
+		
+		// Select All Query
+		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " as calorie,"  
+				+ MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_NAME + " as name,"
+				+ MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_DATE + " as date"
+				+ " FROM " + MealDb.DB_INTAKE
+				+ " LEFT JOIN " + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
+				+ MealDb.DB_FOOD + "." + MealDb.KEY_ID
+			    + " WHERE " + MealDb.KEY_INTAKE_DATE + ">" + day + " AND " + MealDb.KEY_INTAKE_DATE
+			    + " < " + nextDay;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+
+		if (cursor.moveToFirst()) {
+			do {
+				HashMap<String, String> newValue = new HashMap<String,String>();
+				int calories = cursor.getInt(cursor.getColumnIndex("calorie"));
+				String name = cursor.getString(cursor.getColumnIndex("name"));
+				int date = cursor.getInt(cursor.getColumnIndex("date"));
+				newValue.put("calorie", Integer.toString(calories));
+				newValue.put("date", Integer.toString(date));
+				newValue.put("name", name);
+				values.add(newValue);
+			} while (cursor.moveToNext());
+		}
+
+		// closing connection
+		cursor.close();
+		
+		return values;
 	}
 	
 	public void saveNewIntake(int timestamp, String foodName, int quantity) {

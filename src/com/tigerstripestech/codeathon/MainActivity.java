@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 	
 	public void onClickTest(View v) {
 
-		Intent intent = new Intent(this, IntakeSelect.class);
+		Intent intent = new Intent(this, IntakeDetails.class);
 		//Intent confirmRun = new Intent(getActivity(), RunInfo.class);
         
         Bundle extras = new Bundle();
