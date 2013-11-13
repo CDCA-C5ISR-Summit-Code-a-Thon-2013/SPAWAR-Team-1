@@ -30,7 +30,7 @@
 		        android:layout_toRightOf="@id/selectDateTextView"
 		        android:background="@drawable/spinner_button"
 		        android:onClick="showDatePickerDialog"
-		        android:text="No Date Set"
+		        android:text="Please Select Date"
 		        android:textSize="14sp" />
 
 		</RelativeLayout>

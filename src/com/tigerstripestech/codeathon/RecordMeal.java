@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.tigerstripestech.codeathon.db.MealDbHelper;
 import com.tigerstripestech.codeathon.objects.Food;
@@ -63,11 +64,11 @@ public class RecordMeal extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				curMeal = (String) parent.getItemAtPosition(pos).toString();
-				/*
-				String type = dbHelper.getFoodTypeFromItem(curMeal);
+				Food f = dbHelper.getFoodFromString(curMeal);
+				String fType = f.getTypeString();
 				TextView quantity = (TextView) findViewById(R.id.selectQuantityTextView);
-				quantity.setText("Quantity (in " + type + "):");
-				*/
+				quantity.setText("Quantity (in " + fType + "):");
+				
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
