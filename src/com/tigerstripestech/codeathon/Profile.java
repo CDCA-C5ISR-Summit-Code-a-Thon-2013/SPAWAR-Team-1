@@ -15,22 +15,10 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_record_meal);
+		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		spinMeal = (Spinner) findViewById(R.id.spinMeal);
-		
-		populateSpinner();
-	}
-	
-	private void populateSpinner(){
-		
-		//List<String> meals = dbHelper.getAllMeals();
-		String[] meals = getResources().getStringArray(R.array.meals);
-		ArrayAdapter<String> mealAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, meals);
-		
-		spinMeal.setAdapter(mealAdapter);
 	}
 
 	/**

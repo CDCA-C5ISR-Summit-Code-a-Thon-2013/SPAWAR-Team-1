@@ -11,7 +11,7 @@
     <string name="selectMeal">Select Meal:</string>
     <string-array name="meals">
         <item >Granola Bar</item>
-        <item >selectWeightselectWeightMRE Bar</item>
+        <item >MRE Bar</item>
     </string-array>
     <string name="enterWeight">Enter Weight:</string>
     <string name="enterHeight">Enter Height (in inches):</string>
@@ -55,4 +55,5 @@
         <item>14</item>
         <item>13</item>
     </string-array>
+        <string name="title_activity_profile">Update Profile</string>
 </resources>
