@@ -58,4 +58,9 @@
     </string-array>
         <string name="title_activity_profile">Update Profile</string>
         <string name="finish">Finish &amp; Save</string>
+        <string name="save">Save</string>
+        <string name="addNew">Add New</string>
+        <string name="selectQuantity">Quantity:</string>
+        <string name="selectTime">Select Time:</string>
+        <string name="selectDate">Select Date:</string>
 </resources>

@@ -36,8 +36,8 @@ public class Profile extends Activity {
 		String height = heightText.getText().toString();
 		String weight = weightText.getText().toString();
 		
-		Log.d("CODEATHON", "Height is: " + height);
-		Log.d("CODEATHON", "Weight is: " + weight);
+		//Log.d("CODEATHON", "Height is: " + height);
+		//Log.d("CODEATHON", "Weight is: " + weight);
 		
 		_appPrefs.saveHeight(height);
 		_appPrefs.saveWeight(weight);

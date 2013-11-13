@@ -1,5 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,12 +6,67 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RecordMeal" >
+    tools:context=".RecordMeal" xmlns:android="http://schemas.android.com/apk/res/android">
 
+    
+    
+        <RelativeLayout
+	        android:id="@+id/RelativeLayout05"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" >
+	        <TextView
+	            android:id="@+id/selectDateTextView"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/selectDate"
+	            android:textColor="#FFFFFF" />
+
+		    <Button
+		        android:id="@+id/btnDate"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:layout_marginLeft="20dp"
+		        android:layout_toRightOf="@id/selectDateTextView"
+		        android:background="@drawable/spinner_button"
+		        android:onClick="showDatePickerDialog"
+		        android:text="No Date Set"
+		        android:textSize="14sp" />
+
+		</RelativeLayout>
+		
+        <RelativeLayout
+            android:id="@+id/RelativeLayout04"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" >
+
+	        <TextView
+	            android:id="@+id/selectTimeTextView"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/selectTime"
+	            android:textColor="#FFFFFF" />
+
+		    <Button
+		        android:id="@+id/btnTime"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:layout_marginLeft="20dp"
+		        android:layout_toRightOf="@id/selectTimeTextView"
+		        android:background="@drawable/spinner_button"
+		        android:onClick="showTimePickerDialog"
+		        android:text="--:--"
+		        android:textSize="14sp" />
+
+		</RelativeLayout>
+    
     <RelativeLayout
         android:id="@+id/RelativeLayout01"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
 
         <TextView
             android:id="@+id/selectMealTextView"
@@ -26,27 +80,77 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dip"
+            android:layout_gravity="center"
             android:layout_toRightOf="@id/selectMealTextView"
             android:background="@drawable/spinner_button"
             android:gravity="center"
             android:textSize="14sp" />
     </RelativeLayout>
-
+    
     <RelativeLayout
         android:id="@+id/RelativeLayout02"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp" >
+
+        <TextView
+            android:id="@+id/selectQuantityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/selectQuantity"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/editQuantity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_toRightOf="@id/selectQuantityTextView"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:inputType="number" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayout03"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <Button
+        <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/button_shadow"
-            android:onClick="onClickSaveMeal"
-            android:text="@string/finish"
-            android:textSize="14sp" />
+            android:layout_alignParentBottom="true">
+
+	            <Button
+	                android:id="@+id/addNew"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dp"
+	                android:layout_weight="1"
+	                android:background="@drawable/button_shadow"
+	                android:drawableLeft="@drawable/plus_30"
+	                android:onClick="onClickAddNew"
+	                android:padding="15dip"
+	                android:text="@string/addNew"
+	                android:textSize="14sp" />
+	            
+	            <Button
+	                android:id="@+id/finish"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="5dp"
+	                android:layout_weight="1"
+	                android:background="@drawable/button_shadow"
+	                android:onClick="onClickSaveMeal"
+	                android:padding="15dip"
+	                android:text="@string/finish"
+	                android:textSize="14sp" />
+
+            </LinearLayout>
+        
 
     </RelativeLayout>
 

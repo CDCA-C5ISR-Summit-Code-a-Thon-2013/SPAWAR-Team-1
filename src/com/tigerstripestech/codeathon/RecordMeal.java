@@ -3,14 +3,16 @@ package com.tigerstripestech.codeathon;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.tigerstripestech.codeathon.db.MealDbHelper;
@@ -19,8 +21,10 @@ import com.tigerstripestech.codeathon.objects.Food;
 public class RecordMeal extends Activity {
 	
 	Spinner spinMeal;
+	String curMeal;
+	Button btnTime, btnDate;
 	MealDbHelper dbHelper = App.getDbHelper();
-	private AppPreferences _appPrefs;
+	//private AppPreferences _appPrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +34,13 @@ public class RecordMeal extends Activity {
 		setupActionBar();
 		
 		spinMeal = (Spinner) findViewById(R.id.spinMeal);
+		btnTime = (Button) findViewById(R.id.btnTime);
+		btnDate = (Button) findViewById(R.id.btnDate);
 		
-		_appPrefs = new AppPreferences(getBaseContext());
+		//_appPrefs = new AppPreferences(getBaseContext());
 		
-		Log.d("CODEATHON", _appPrefs.getHeight());
-		Log.d("CODEATHON", _appPrefs.getWeight());
+		//Log.d("CODEATHON", _appPrefs.getHeight());
+		//Log.d("CODEATHON", _appPrefs.getWeight());
 		
 		populateSpinner();
 	}
@@ -52,6 +58,21 @@ public class RecordMeal extends Activity {
 		ArrayAdapter<String> mealAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, meals);
 		
 		spinMeal.setAdapter(mealAdapter);
+		
+		spinMeal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				curMeal = (String) parent.getItemAtPosition(pos).toString();
+				/*
+				String type = dbHelper.getFoodTypeFromItem(curMeal);
+				TextView quantity = (TextView) findViewById(R.id.selectQuantityTextView);
+				quantity.setText("Quantity (in " + type + "):");
+				*/
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 	}
 	
 	public void onClickSaveMeal(View v) {
@@ -60,6 +81,29 @@ public class RecordMeal extends Activity {
 		
 		// TODO: Save meal information logic here
 		finish();
+	}
+	
+	public void onClickAddNew(View v) {
+		Intent intent = new Intent(this, RecordMeal.class);
+		startActivity(intent);
+	}
+	
+	public void showTimePickerDialog(View v) {
+		DialogFragment newFragment = new TimePickerFragment();
+		newFragment.show(getFragmentManager(), "timePicker");
+	}
+	
+	public void onTimeSet(String time) {
+		btnTime.setText(time);
+	}
+	
+	public void showDatePickerDialog(View v) {
+		DialogFragment newFragment = new DatePickerFragment();
+		newFragment.show(getFragmentManager(), "datePicker");
+	}
+	
+	public void onDateSet(String date) {
+		btnDate.setText(date);
 	}
 
 	/**
