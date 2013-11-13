@@ -154,7 +154,9 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		int calories = 0;
 		
 		// Select All Query
-		String selectQuery = "SELECT " +  MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE
+		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE
+				+ " LEFT JOIN " + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
+				+ MealDb.DB_FOOD + "." + MealDb.KEY_ID
 			    + " WHERE " + MealDb.KEY_INTAKE_DATE + ">" + day + " AND " + MealDb.KEY_INTAKE_DATE
 			    + " < " + nextDay;
 		SQLiteDatabase db = this.getReadableDatabase();
