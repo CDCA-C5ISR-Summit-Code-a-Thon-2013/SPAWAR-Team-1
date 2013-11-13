@@ -5,4 +5,43 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <string-array name="food_name_array">
+        <item>Banana</item>
+        <item>Granola</item>
+        <item>Chicken MRE</item>
+        <item>Beef MRE</item>
+        <item>Vegetable MRE</item>
+        <item>Rice</item>
+        <item>Gatorade</item>
+        <item>Steak</item>
+        <item>Soda</item>
+        <item>Orange Juice</item>
+        <item>Milk</item>
+    </string-array>
+        <string-array name="food_type_array">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </string-array>
+        <string-array name="food_calorie_array">
+        <item>105</item>
+        <item>145</item>
+        <item>1270</item>
+        <item>1365</item>
+        <item>1230</item>
+        <item>216</item>
+        <item>30</item>
+        <item>80</item>
+        <item>12</item>
+        <item>14</item>
+        <item>13</item>
+    </string-array>
 </resources>
