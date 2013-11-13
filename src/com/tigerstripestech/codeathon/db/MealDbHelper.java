@@ -1,7 +1,6 @@
 package com.tigerstripestech.codeathon.db;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -105,7 +104,7 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		String selectQuery = "SELECT _id, ((" + MealDb.KEY_INTAKE_DATE + " / 3600) * 3600) hr,"
 				+ "count(*) cnt, sum(calories_per) sum FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
-			    + MealDb.DB_FOOD + " WHERE " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
+			    + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl WHERE hr > " + day + " AND hr < " + nextDay 
 			    + " GROUP BY hr ORDER BY hr;";
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -146,6 +145,35 @@ public class MealDbHelper extends SQLiteOpenHelper{
 
 		// returning people
 		return food;
+	}
+	
+	public int getCaloriesFromDay(int timestamp) {
+
+		int day = (timestamp / 86400) * 86400;
+		int nextDay = ((timestamp / 86400) + 1) * 86400;
+		int calories = 0;
+		
+		// Select All Query
+		String selectQuery = "SELECT " +  MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE
+			    + " WHERE " + MealDb.KEY_INTAKE_DATE + ">" + day + " AND " + MealDb.KEY_INTAKE_DATE
+			    + " < " + nextDay;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+
+		if (cursor.moveToFirst()) {
+			do {
+
+				calories += cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
+
+			} while (cursor.moveToNext());
+		}
+
+		// closing connection
+		cursor.close();
+		
+		return calories;
 	}
 	
 	
