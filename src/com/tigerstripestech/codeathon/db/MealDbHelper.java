@@ -78,9 +78,11 @@ public class MealDbHelper extends SQLiteOpenHelper{
 			do {
 				// cursor has values in the format = _id, pid, name, updated
 				Food food = new Food();
+				int id = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_ID));
 				String name = cursor.getString(cursor.getColumnIndex(MealDb.KEY_FOOD_NAME));
 				int type = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_COUNT));
 				int calories = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
+				food.set_id(id);
 				food.setName(name);
 				food.setType(type);
 				food.setCalories(calories);
@@ -179,10 +181,24 @@ public class MealDbHelper extends SQLiteOpenHelper{
 	}
 	
 	public void saveNewIntake(int timestamp, String foodName, int quantity) {
+		ContentValues testData = new ContentValues();
+		Food food = getFoodFromString(foodName);
+		testData.put(MealDb.KEY_INTAKE_DATE, timestamp);
+		testData.put(MealDb.KEY_INTAKE_FOOD, food.get_id());
+		testData.put(MealDb.KEY_INTAKE_COUNT, quantity);
 		
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.insert(MealDb.DB_INTAKE, null, testData);
 	}
 	
-	public void saveNewFood(String foodName, int foodType, int calories) {
+	public void saveNewFood(String foodName, String foodType, int calories) {
+		ContentValues testData = new ContentValues();
 		
+		testData.put(MealDb.KEY_FOOD_NAME, foodName);
+		testData.put(MealDb.KEY_FOOD_COUNT, Food.getTypeInt(foodType));
+		testData.put(MealDb.KEY_FOOD_CALORIE, calories);
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.insert(MealDb.DB_INTAKE, null, testData);
 	}
 }
