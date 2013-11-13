@@ -20,17 +20,20 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, RecordMeal.class);
 		startActivity(intent);
 	}
-	/*
+	
+	
+	// TODO: Update to actual Calendar class
 	public void onClickCalendar(View v) {
-		Intent intent = new Intent(this, Calendar.class);
+		Intent intent = new Intent(this, RecordMeal.class);
 		startActivity(intent);
 	}
 	
+	// TODO: Update to actual Profile class
 	public void onClickProfile(View v) {
 		Intent intent = new Intent(this, Profile.class);
 		startActivity(intent);
 	}
-	*/
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

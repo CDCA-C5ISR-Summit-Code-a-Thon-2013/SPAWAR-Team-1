@@ -11,7 +11,9 @@
     <string name="selectMeal">Select Meal:</string>
     <string-array name="meals">
         <item >Granola Bar</item>
-        <item >MRE Bar</item>
+        <item >selectWeightselectWeightMRE Bar</item>
     </string-array>
+    <string name="enterWeight">Enter Weight:</string>
+    <string name="enterHeight">Enter Height (in inches):</string>
 
 </resources>
