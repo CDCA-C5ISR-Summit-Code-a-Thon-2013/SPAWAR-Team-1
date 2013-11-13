@@ -69,9 +69,10 @@ public class IntakeSelect extends Activity {
 					Calendar cal = Calendar.getInstance();
 					Long milli = (long) (sTime) * 1000;
 					cal.setTimeInMillis(milli);
-					SimpleDateFormat format = new SimpleDateFormat("hh:00 a");
+					SimpleDateFormat format = new SimpleDateFormat("h a");
 					String curDay = format.format(cal.getTime());
-					cal.add(Calendar.DATE, 1);
+					
+					cal.setTimeInMillis(milli + (3600 * 1000));
 					String nextDay = format.format(cal.getTime());
 					tv.setText(curDay + " - " + nextDay);
 					return true;
