@@ -100,12 +100,14 @@ public class MealDbHelper extends SQLiteOpenHelper{
 	
 	public Cursor getIntakeRows(int timestamp) {
 		
-		int day = (timestamp * 86400) * 86400;
+		int day = (timestamp / 86400) * 86400;
+		int nextDay = ((timestamp / 86400) + 1) * 86400;
 		String selectQuery = "SELECT _id, ((" + MealDb.KEY_INTAKE_DATE + " / 3600) * 3600) hr,"
 				+ "count(*) cnt, sum(calories_per) sum FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
 			    + MealDb.DB_FOOD + " WHERE " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
-			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl GROUP BY hr ORDER BY hr;";
+			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl GROUP BY hr WHERE hr > " + day
+			    + " AND hr < " + nextDay + " ORDER BY hr;";
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -114,8 +116,36 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		
 	}
 	
-	public String getTypefromFoodString(String food) {
-		return "";
+	public Food getFoodFromString(String foodName) {
+		Food food = new Food();
+
+		// Select All Query
+		String selectQuery = "SELECT * FROM " + MealDb.DB_FOOD
+				+ " WHERE " + MealDb.KEY_FOOD_NAME + "=" + foodName;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+
+		if (cursor.moveToFirst()) {
+			do {
+				// cursor has values in the format = _id, pid, name, updated
+				String name = cursor.getString(cursor.getColumnIndex(MealDb.KEY_FOOD_NAME));
+				int type = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_COUNT));
+				int calories = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
+				food.setName(name);
+				food.setType(type);
+				food.setCalories(calories);
+
+			} while (cursor.moveToNext());
+		}
+
+		// closing connection
+		cursor.close();
+
+		// returning people
+		return food;
 	}
 	
 	
