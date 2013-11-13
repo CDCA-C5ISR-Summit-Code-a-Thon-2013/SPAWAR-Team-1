@@ -8,6 +8,7 @@
     <string name="calendar">View Calendar</string>
     <string name="profile">Update Profile</string>
     <string name="title_activity_record_meal">RecordMeal</string>
+    <string name="title_activity_calendar_activity">CalendarActivity</string>
     <string name="selectMeal">Select Meal:</string>
     <string-array name="meals">
         <item >Granola Bar</item>

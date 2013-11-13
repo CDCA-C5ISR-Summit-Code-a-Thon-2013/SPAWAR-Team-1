@@ -39,6 +39,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tigerstripestech.codeathon.MainActivity" />
         </activity>
+        <activity
+            android:name="com.tigerstripestech.codeathon.CalendarActivity"
+            android:label="@string/title_activity_calendar_activity"
+            android:parentActivityName="com.tigerstripestech.codeathon.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tigerstripestech.codeathon.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

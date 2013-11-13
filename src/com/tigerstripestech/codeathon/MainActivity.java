@@ -37,13 +37,15 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	// TODO: Update to actual Calendar class
 	public void onClickCalendar(View v) {
-		Intent intent = new Intent(this, RecordMeal.class);
+
+		Intent intent = new Intent(this, CalendarActivity.class);
+
 		startActivity(intent);
 	}
+
 	
-	// TODO: Update to actual Profile class
+
 	public void onClickProfile(View v) {
 		Intent intent = new Intent(this, Profile.class);
 		startActivity(intent);
