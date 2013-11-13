@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:orientation="vertical"
+  android:background="#90FFFFFF"
+  android:layout_height="wrap_content">
+  
+  <TextView
+      android:id="@+id/popUpDate"
+      android:layout_width="fill_parent"
+      android:text="PopUp Window"
+      android:textColor="#000000"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:layout_height="wrap_content">
+  </TextView>
+  
+   <TextView
+      android:id="@+id/popUpCalories"
+      android:layout_width="fill_parent"
+      android:text="PopUp Window"
+      android:textColor="#000000"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:layout_height="wrap_content">
+  </TextView>
+  
+  <Button
+      android:id="@+id/btnDetails"
+      android:text="@string/moreDetails"
+      android:layout_height="wrap_content"
+      android:layout_width="175dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_shadow"
+        android:onClick="onClickCalendar"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="14sp" />
+  <Button
+      android:id="@+id/btnCancel"
+      android:text="@string/close"
+      android:layout_height="wrap_content"
+      android:layout_width="175dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_shadow"
+        android:onClick="onClickCalendar"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="14sp" />
+  
+</LinearLayout>

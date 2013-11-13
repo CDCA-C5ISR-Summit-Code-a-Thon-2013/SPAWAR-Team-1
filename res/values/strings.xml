@@ -10,6 +10,8 @@
     <string name="title_activity_record_meal">RecordMeal</string>
     <string name="title_activity_calendar_activity">CalendarActivity</string>
     <string name="selectMeal">Select Meal:</string>
+    <string name="moreDetails">More Details</string>
+    <string name="close">Close</string>
     <string-array name="meals">
         <item >Granola Bar</item>
         <item >MRE Bar</item>
