@@ -1,6 +1,7 @@
 package com.tigerstripestech.codeathon;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -51,7 +52,20 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public void onClickTest(View v) {
 
+		Intent intent = new Intent(this, IntakeSelect.class);
+		//Intent confirmRun = new Intent(getActivity(), RunInfo.class);
+        
+        Bundle extras = new Bundle();
+        Calendar cal = Calendar.getInstance();
+        int day = (int) (cal.getTimeInMillis() / 1000);
+        extras.putInt("date", day);
+
+        intent.putExtras(extras);
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -18,7 +18,6 @@ public class MealDb {
 	
 	public static final String DB_INTAKE = "Intake";
 	public static final String KEY_INTAKE_DATE = "date";
-	public static final String KEY_INTAKE_MEAL = "meal_number";
 	public static final String KEY_INTAKE_FOOD = "food_id";
 	public static final String KEY_INTAKE_COUNT = "food_quantity";
 	
@@ -54,7 +53,6 @@ public class MealDb {
 		String createTable = "CREATE TABLE IF NOT EXISTS "
 				+ DB_INTAKE + " (" + KEY_ID + " INTEGER PRIMARY KEY, "
 				+ KEY_INTAKE_DATE+ " INTEGER , "
-				+ KEY_INTAKE_MEAL + " INTEGER , "
 				+ KEY_INTAKE_FOOD + " INTEGER , "
 				+ KEY_INTAKE_COUNT + " INTEGER)";
 		Log.d(LOG_TAG, createTable);

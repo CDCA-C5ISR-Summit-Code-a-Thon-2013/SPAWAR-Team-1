@@ -1,6 +1,7 @@
 package com.tigerstripestech.codeathon.db;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,6 +42,9 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		String[] food_names = res.getStringArray(R.array.food_name_array);
 		String[] food_type = res.getStringArray(R.array.food_type_array);
 		String[] food_calorie = res.getStringArray(R.array.food_calorie_array);
+		String[] intake_time = res.getStringArray(R.array.intake_time_array);
+		String[] intake_food = res.getStringArray(R.array.intake_food_array);
+		String[] intake_quantity = res.getStringArray(R.array.intake_quantity_array);
 		
 		for(int i = 0; i < food_names.length; i++) {
 			testData = new ContentValues();
@@ -48,6 +52,14 @@ public class MealDbHelper extends SQLiteOpenHelper{
 			testData.put(MealDb.KEY_FOOD_COUNT, food_type[i]);
 			testData.put(MealDb.KEY_FOOD_CALORIE, food_calorie[i]);
 			db.insert(MealDb.DB_FOOD, null, testData);
+		}
+		
+		for(int i = 0; i < intake_time.length; i++) {
+			testData = new ContentValues();
+			testData.put(MealDb.KEY_INTAKE_DATE, Integer.parseInt(intake_time[i]));
+			testData.put(MealDb.KEY_INTAKE_FOOD, Integer.parseInt(intake_food[i]));
+			testData.put(MealDb.KEY_INTAKE_COUNT, Integer.parseInt(intake_quantity[i]));
+			db.insert(MealDb.DB_INTAKE, null, testData);
 		}
 	}
 	
@@ -84,6 +96,26 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		// returning people
 		return foodArray;
 
+	}
+	
+	public Cursor getIntakeRows(int timestamp) {
+		
+		int day = (timestamp * 86400) * 86400;
+		String selectQuery = "SELECT _id, ((" + MealDb.KEY_INTAKE_DATE + " / 3600) * 3600) hr,"
+				+ "count(*) cnt, sum(calories_per) sum FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
+			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
+			    + MealDb.DB_FOOD + " WHERE " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
+			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl GROUP BY hr ORDER BY hr;";
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		
+		return cursor;
+		
+	}
+	
+	public String getTypefromFoodString(String food) {
+		return "";
 	}
 	
 	
