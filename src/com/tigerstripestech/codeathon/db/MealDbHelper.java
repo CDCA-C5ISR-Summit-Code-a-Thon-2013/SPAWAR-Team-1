@@ -105,7 +105,7 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		int day = (timestamp / 86400) * 86400;
 		int nextDay = ((timestamp / 86400) + 1) * 86400;
 		String selectQuery = "SELECT _id, ((" + MealDb.KEY_INTAKE_DATE + " / 3600) * 3600) hr,"
-				+ "count(*) cnt, sum(calories_per) sum FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
+				+ "count(*) cnt, (sum(calories_per) * count(*)) total FROM (SELECT " + MealDb.DB_INTAKE + ".*, "
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE + " LEFT JOIN "
 			    + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
 			    + MealDb.DB_FOOD + "." + MealDb.KEY_ID + ") tbl WHERE hr > " + day + " AND hr < " + nextDay 
@@ -159,7 +159,9 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		int calories = 0;
 		
 		// Select All Query
-		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " FROM " + MealDb.DB_INTAKE
+		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + ","
+				+ MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_COUNT
+				+ " FROM " + MealDb.DB_INTAKE
 				+ " LEFT JOIN " + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
 				+ MealDb.DB_FOOD + "." + MealDb.KEY_ID
 			    + " WHERE " + MealDb.KEY_INTAKE_DATE + ">" + day + " AND " + MealDb.KEY_INTAKE_DATE
@@ -172,7 +174,9 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		if (cursor.moveToFirst()) {
 			do {
 
-				calories += cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
+				int cals = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
+				int quantity = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_INTAKE_COUNT));
+				calories += cals * quantity;
 
 			} while (cursor.moveToNext());
 		}
@@ -191,6 +195,7 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		// Select All Query
 		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " as calorie,"  
 				+ MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_NAME + " as name,"
+				+ MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_COUNT + " as count,"
 				+ MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_DATE + " as date"
 				+ " FROM " + MealDb.DB_INTAKE
 				+ " LEFT JOIN " + MealDb.DB_FOOD + " ON " + MealDb.DB_INTAKE + "." + MealDb.KEY_INTAKE_FOOD + "="
@@ -207,10 +212,12 @@ public class MealDbHelper extends SQLiteOpenHelper{
 				HashMap<String, String> newValue = new HashMap<String,String>();
 				int calories = cursor.getInt(cursor.getColumnIndex("calorie"));
 				String name = cursor.getString(cursor.getColumnIndex("name"));
+				int count = cursor.getInt(cursor.getColumnIndex("count"));
 				int date = cursor.getInt(cursor.getColumnIndex("date"));
 				newValue.put("calorie", Integer.toString(calories));
 				newValue.put("date", Integer.toString(date));
 				newValue.put("name", name);
+				newValue.put("count", Integer.toString(count));
 				values.add(newValue);
 			} while (cursor.moveToNext());
 		}

@@ -48,7 +48,7 @@ public class IntakeSelect extends Activity {
 		String[] columns = new String[] {
 				"cnt",
 				"hr",
-				"sum"
+				"total"
 		};
 		
 		int[] to = new int[] {
