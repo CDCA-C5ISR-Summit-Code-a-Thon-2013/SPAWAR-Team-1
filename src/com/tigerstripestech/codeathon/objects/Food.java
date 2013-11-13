@@ -46,6 +46,10 @@ public class Food {
 		}
 	}
 
+	public String getTypeString() {
+		return getTypeString(this.type);
+	}
+	
 	public int getCalories() {
 		return calories;
 	}
