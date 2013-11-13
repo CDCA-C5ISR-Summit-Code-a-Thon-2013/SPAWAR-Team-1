@@ -30,16 +30,20 @@ public class Profile extends Activity {
 	public void onClickSaveSettings(View v){
 		EditText heightText;
 		EditText weightText;
+		EditText goalText;
 		heightText = (EditText)findViewById(R.id.editHeight);
 		weightText = (EditText)findViewById(R.id.editWeight);
+		goalText = (EditText)findViewById(R.id.editCaloricGoal);
 		String height = heightText.getText().toString();
 		String weight = weightText.getText().toString();
+		String caloricGoal = goalText.getText().toString();
 		
 		//Log.d("CODEATHON", "Height is: " + height);
 		//Log.d("CODEATHON", "Weight is: " + weight);
 		
 		_appPrefs.saveHeight(height);
 		_appPrefs.saveWeight(weight);
+		_appPrefs.saveGoal(caloricGoal);
 		
 		Toast.makeText(getApplicationContext(), "Saved Settings", Toast.LENGTH_LONG).show();
 		

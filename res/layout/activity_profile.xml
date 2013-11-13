@@ -52,6 +52,28 @@
             android:inputType="number" />
 
     </LinearLayout>
+    
+     <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enterCaloricGoal"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/editCaloricGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button1"
