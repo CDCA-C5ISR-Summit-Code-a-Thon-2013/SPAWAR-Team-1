@@ -1,16 +1,23 @@
 package com.tigerstripestech.codeathon;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.tigerstripestech.codeathon.db.MealDbHelper;
+import com.tigerstripestech.codeathon.objects.Food;
+
 public class RecordMeal extends Activity {
 	
 	Spinner spinMeal;
+	MealDbHelper dbHelper = App.getDbHelper();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +33,14 @@ public class RecordMeal extends Activity {
 	
 	private void populateSpinner(){
 		
-		//List<String> meals = dbHelper.getAllMeals();
-		String[] meals = getResources().getStringArray(R.array.meals);
+		//ArrayList<String> meals = dbHelper.getAllFood();
+		ArrayList<Food> allFood = dbHelper.getAllFood();
+		ArrayList<String> meals = new ArrayList<String>();
+		
+		for(int i=0;i<allFood.size();i++){
+			meals.add(allFood.get(i).getName());
+		}
+		
 		ArrayAdapter<String> mealAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, meals);
 		
 		spinMeal.setAdapter(mealAdapter);
