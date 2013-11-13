@@ -3,12 +3,16 @@ package com.tigerstripestech.codeathon;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 
 import com.tigerstripestech.codeathon.db.MealDbHelper;
 import com.tigerstripestech.codeathon.objects.Food;
+
+
 
 public class MainActivity extends Activity {
 
@@ -26,6 +30,25 @@ public class MainActivity extends Activity {
 			Log.d("Codeathon Food Msg", food.getName());
 		}
 	}
+	
+	public void onClickRecordMeal(View v) {
+		Intent intent = new Intent(this, RecordMeal.class);
+		startActivity(intent);
+	}
+	
+	
+	// TODO: Update to actual Calendar class
+	public void onClickCalendar(View v) {
+		Intent intent = new Intent(this, RecordMeal.class);
+		startActivity(intent);
+	}
+	
+	// TODO: Update to actual Profile class
+	public void onClickProfile(View v) {
+		Intent intent = new Intent(this, Profile.class);
+		startActivity(intent);
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
