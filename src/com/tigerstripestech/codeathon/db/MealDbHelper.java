@@ -133,10 +133,12 @@ public class MealDbHelper extends SQLiteOpenHelper{
 			do {
 				// cursor has values in the format = _id, pid, name, updated
 				String name = cursor.getString(cursor.getColumnIndex(MealDb.KEY_FOOD_NAME));
+				int foodId = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_ID));
 				int type = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_COUNT));
 				int calories = cursor.getInt(cursor.getColumnIndex(MealDb.KEY_FOOD_CALORIE));
 				food.setName(name);
 				food.setType(type);
+				food.set_id(foodId);
 				food.setCalories(calories);
 
 			} while (cursor.moveToNext());
