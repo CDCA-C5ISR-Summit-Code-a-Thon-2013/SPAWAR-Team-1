@@ -178,5 +178,11 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		return calories;
 	}
 	
+	public void saveNewIntake(int timestamp, String foodName, int quantity) {
+		
+	}
 	
+	public void saveNewFood(String foodName, int foodType, int calories) {
+		
+	}
 }
