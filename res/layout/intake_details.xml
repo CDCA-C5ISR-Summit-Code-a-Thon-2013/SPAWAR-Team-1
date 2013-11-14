@@ -73,7 +73,7 @@
 
             <TextView
                 style="@style/TableHeader"
-                android:text="Intake Consumed" />
+                android:text="Food Consumed" />
 
             <TextView
                 style="@style/TableHeader"

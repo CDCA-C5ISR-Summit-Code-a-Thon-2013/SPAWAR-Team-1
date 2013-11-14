@@ -103,7 +103,7 @@ public class IntakeDetails extends Activity {
 			TextView detailCount = (TextView) tr.findViewById(R.id.detailRowCount);
 			int count = Integer.parseInt(value.get("count"));
 			detailCount.setText(value.get("count"));
-			intake+=count;
+			intake+=1;
 
 			// Add Fourth Column
 			TextView detailCalorie = (TextView) tr.findViewById(R.id.detailRowCalorie);

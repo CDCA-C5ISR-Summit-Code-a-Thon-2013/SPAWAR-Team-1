@@ -101,7 +101,6 @@ public class IntakeSelect extends Activity {
 
                 intent.putExtras(extras);
                 startActivity(intent);
-                finish();
 				
 			}
 		});
