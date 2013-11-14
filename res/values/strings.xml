@@ -18,6 +18,7 @@
     </string-array>
     <string name="enterWeight">Enter Weight:</string>
     <string name="enterHeight">Enter Height (in inches):</string>
+    <string name="enterCaloricGoal">Enter Daily Caloric Intake Goal:</string>
 
     <string-array name="food_name_array">
         <item>Banana</item>

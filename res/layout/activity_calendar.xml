@@ -16,6 +16,8 @@
                     android:layout_weight="2"
                     android:layout_centerHorizontal="true"
                     android:background="@android:color/holo_orange_dark"
+                    android:unfocusedMonthDateColor="#FFFFFF"
+                    android:dateTextAppearance="?android:attr/textAppearanceLarge"
                     android:showWeekNumber="false"
                     android:animateLayoutChanges="false"
                     android:clipChildren="false"
@@ -42,6 +44,15 @@
   
    <TextView
       android:id="@+id/focusCalories"
+      android:layout_width="fill_parent"
+      android:text="PopUp Window"
+      android:textColor="@android:color/white"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:layout_height="wrap_content">
+  </TextView>
+  <TextView
+      android:id="@+id/calorieComparison"
       android:layout_width="fill_parent"
       android:text="PopUp Window"
       android:textColor="@android:color/white"
