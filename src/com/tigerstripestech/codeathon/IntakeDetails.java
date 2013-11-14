@@ -62,11 +62,11 @@ public class IntakeDetails extends Activity {
 		TextView title = (TextView) findViewById(R.id.details_date);
 		TextView titleTime = (TextView) findViewById(R.id.details_time);
 		Calendar cal = Calendar.getInstance();
-		Long milli = (long) (day) * 1000;
+		int ESTOffset = 3600 * 5;
+		Long milli = (long) (day + ESTOffset) * 1000;
 		cal.setTimeInMillis(milli);
-		
 		Calendar endCal = Calendar.getInstance();
-		Long endMilli = (long) (end) * 1000;
+		Long endMilli = (long) (end + ESTOffset) * 1000;
 		endCal.setTimeInMillis(endMilli);
 
 		SimpleDateFormat format = new SimpleDateFormat("EEE d MMM yyyy");
@@ -88,7 +88,7 @@ public class IntakeDetails extends Activity {
 			// Add First Column
 			TextView detailTime = (TextView) tr.findViewById(R.id.detailRowTime);
 			cal = Calendar.getInstance();
-			milli = (long) (Long.parseLong(value.get("date"))) * 1000;
+			milli = (long) (Long.parseLong(value.get("date")) + ESTOffset) * 1000;
 			cal.setTimeInMillis(milli);
 			format = new SimpleDateFormat("hh:mm a");
 			timeString = format.format(cal.getTime());

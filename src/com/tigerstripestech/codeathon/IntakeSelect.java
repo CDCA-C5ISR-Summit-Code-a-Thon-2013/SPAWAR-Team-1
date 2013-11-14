@@ -67,7 +67,8 @@ public class IntakeSelect extends Activity {
 				TextView tv = (TextView) view;
 				if(tv != null && tv.getId() == R.id.intake_date){
 					Calendar cal = Calendar.getInstance();
-					Long milli = (long) (sTime) * 1000;
+					int ESTOffset = 3600 * 5; 
+					Long milli = (long) (sTime + ESTOffset) * 1000;
 					cal.setTimeInMillis(milli);
 					SimpleDateFormat format = new SimpleDateFormat("h a");
 					String curDay = format.format(cal.getTime());

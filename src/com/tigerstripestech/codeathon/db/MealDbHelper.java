@@ -250,9 +250,10 @@ public class MealDbHelper extends SQLiteOpenHelper{
 	}
 	
 	public void saveNewIntake(int timestamp, String foodName, int quantity) {
+		int ESTOffset = 3600 * 5;
 		ContentValues testData = new ContentValues();
 		Food food = getFoodFromString(foodName);
-		testData.put(MealDb.KEY_INTAKE_DATE, timestamp);
+		testData.put(MealDb.KEY_INTAKE_DATE, timestamp - ESTOffset);
 		testData.put(MealDb.KEY_INTAKE_FOOD, food.get_id());
 		testData.put(MealDb.KEY_INTAKE_COUNT, quantity);
 		
