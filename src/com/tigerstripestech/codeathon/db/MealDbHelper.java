@@ -268,6 +268,6 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		testData.put(MealDb.KEY_FOOD_CALORIE, calories);
 		
 		SQLiteDatabase db = this.getReadableDatabase();
-		db.insert(MealDb.DB_INTAKE, null, testData);
+		db.insert(MealDb.DB_FOOD, null, testData);
 	}
 }
