@@ -169,6 +169,7 @@ public class RecordMeal extends Activity {
 			builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dbHelper.saveNewFood(foodName.getText().toString(), curType, Integer.parseInt(calories.getText().toString()));
+					populateSpinner();
 				}
 				});
 			builder.setNegativeButton(android.R.string.cancel, null);

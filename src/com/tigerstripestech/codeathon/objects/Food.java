@@ -53,9 +53,14 @@ public class Food {
 	}
 	
 	public static int getTypeInt(String type) {
-		if(type.equalsIgnoreCase("quantity")) return MealDb.TYPE_QUANTITY;
-		if(type.equalsIgnoreCase("cup")) return MealDb.TYPE_CUP;
-		if(type.equalsIgnoreCase("oz")) return MealDb.TYPE_OZ;
+		if(type.equalsIgnoreCase("quantity")){
+			return MealDb.TYPE_QUANTITY;
+		}else if(type.equalsIgnoreCase("cups")){
+			return MealDb.TYPE_CUP;
+		}else if(type.equalsIgnoreCase("oz")){
+			return MealDb.TYPE_OZ;
+		}
+		
 		return 0;
 	}
 	
