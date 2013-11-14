@@ -96,4 +96,9 @@
         <string name="selectQuantity">Quantity:</string>
         <string name="selectTime">Select Time:</string>
         <string name="selectDate">Select Date:</string>
+        <string-array name="foodTypes">
+            <item >quantity</item>
+            <item >cups</item>
+            <item >oz</item>
+        </string-array>
 </resources>

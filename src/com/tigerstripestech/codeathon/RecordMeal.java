@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +32,10 @@ import com.tigerstripestech.codeathon.objects.Food;
 
 public class RecordMeal extends Activity {
 	
-	Spinner spinMeal;
-	String curMeal;
+	Spinner spinMeal, spinType;
+	String curMeal, curType;
 	Button btnTime, btnDate;
+	EditText calories, foodName;
 	MealDbHelper dbHelper = App.getDbHelper();
 	//private AppPreferences _appPrefs;
 
@@ -44,6 +47,7 @@ public class RecordMeal extends Activity {
 		setupActionBar();
 		
 		spinMeal = (Spinner) findViewById(R.id.spinMeal);
+		spinType = (Spinner) findViewById(R.id.spinType);
 		btnTime = (Button) findViewById(R.id.btnTime);
 		btnDate = (Button) findViewById(R.id.btnDate);
 		
@@ -60,6 +64,7 @@ public class RecordMeal extends Activity {
 		//ArrayList<String> meals = dbHelper.getAllFood();
 		ArrayList<Food> allFood = dbHelper.getAllFood();
 		ArrayList<String> meals = new ArrayList<String>();
+		
 		
 		meals.add("-- Select Food --");
 		
@@ -93,8 +98,38 @@ public class RecordMeal extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
+		
 	}
+	/*
+	private void populateOtherSpinner(){
+		//ArrayList<String> meals = dbHelper.getAllFood();
+		ArrayList<String> allTypes = dbHelper.getAllTypes();
+		ArrayList<String> types = new ArrayList<String>();
+		
+		for(int i=0;i<allTypes.size();i++){
+			types.add(allTypes.get(i));
+		}
+		
+		ArrayAdapter<String> typesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, types);
+		
+		spinType.setAdapter(typesAdapter);
+		
+		spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				tmp = (String) parent.getItemAtPosition(pos).toString();
+				Log.d("codeathon", "Tmp is: " + tmp);
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+		
+	}
+	*/
 	
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
 	public void onClickSaveMeal(View v) {
 		if(curMeal.equalsIgnoreCase("-- Select Food --")){
 			String title, message;
@@ -109,6 +144,45 @@ public class RecordMeal extends Activity {
 			AlertDialog dialog = builder.create();
 			dialog.setCanceledOnTouchOutside(false);
 			dialog.show();
+		}
+		else if(curMeal.equalsIgnoreCase("Other")){
+			//populateOtherSpinner();
+			View otherView;
+			
+			LayoutInflater inflater = this.getLayoutInflater();	
+			otherView = inflater.inflate(R.layout.other_dialog, null);
+			foodName = (EditText) otherView.findViewById(R.id.foodNameEditText);
+			calories = (EditText) otherView.findViewById(R.id.caloriesEditText);
+			final Spinner sp = (Spinner) otherView.findViewById(R.id.spinType);
+			sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+					curType = (String) parent.getItemAtPosition(pos).toString();
+				}
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+				}
+			});
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setView(otherView);
+			builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					dbHelper.saveNewFood(foodName.getText().toString(), curType, Integer.parseInt(calories.getText().toString()));
+				}
+				});
+			builder.setNegativeButton(android.R.string.cancel, null);
+			builder.setCancelable(false);
+			AlertDialog dialog = builder.create();
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.show();
+			
+			Button b = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+			if(b!=null)
+				b.setBackground(getResources().getDrawable(R.drawable.app_bg));
+			b = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+			if(b!=null)
+				b.setBackground(getResources().getDrawable(R.drawable.app_bg));
 		}
 		else{
 		
