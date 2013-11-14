@@ -154,9 +154,15 @@ public class MealDbHelper extends SQLiteOpenHelper{
 	}
 	
 	public int getCaloriesFromDay(int timestamp) {
-
 		int day = (timestamp / 86400) * 86400;
 		int nextDay = ((timestamp / 86400) + 1) * 86400;
+		return getCaloriesFromTime(day, nextDay);
+	
+	}
+	public int getCaloriesFromTime(int start, int end) {
+
+		int day = start;
+		int nextDay = end;
 		int calories = 0;
 		
 		// Select All Query
@@ -188,10 +194,24 @@ public class MealDbHelper extends SQLiteOpenHelper{
 		return calories;
 	}
 	
-	public ArrayList<HashMap<String, String>> getFoodFromDay(int timestamp) {
-		ArrayList<HashMap<String, String>> values = new ArrayList<HashMap<String, String>>();
+	public ArrayList<HashMap<String, String>> getFoodFromTime(int timestamp) {
 		int day = (timestamp / 86400) * 86400;
 		int nextDay = ((timestamp / 86400) + 1) * 86400;
+		return getFoodFromTime(day, nextDay);
+	}
+	
+	public ArrayList<String> getAllTypes() {
+		ArrayList<String> types = new ArrayList<String>();
+		types.add("quantity");
+		types.add("cups");
+		types.add("ounces");
+		return types;
+	}
+	
+	public ArrayList<HashMap<String, String>> getFoodFromTime(int start, int end) {
+		ArrayList<HashMap<String, String>> values = new ArrayList<HashMap<String, String>>();
+		int day = start;
+		int nextDay = end;
 		
 		// Select All Query
 		String selectQuery = "SELECT " +  MealDb.DB_FOOD + "." + MealDb.KEY_FOOD_CALORIE + " as calorie,"  

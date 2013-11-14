@@ -43,28 +43,38 @@ public class IntakeDetails extends Activity {
 			}
 		});
 		dbHelper = App.getDbHelper();
-		int day;
+		int day, end;
 
 		
 		if (this.getIntent().getExtras() != null) {
 			Bundle bundle = this.getIntent().getExtras();
 			day = bundle.getInt("date");
+			end = bundle.getInt("end");
 
 		} else {
 			throw new NullPointerException("argument is missing");
 		}
 
-		ArrayList<HashMap<String, String>> foodArray = dbHelper.getFoodFromDay(day);
+		//ArrayList<HashMap<String, String>> foodArray = dbHelper.getFoodFromDay(day);
+		ArrayList<HashMap<String, String>> foodArray = dbHelper.getFoodFromTime(day, end);
 		tl = (TableLayout) findViewById(R.id.detailsTable);
 
 		TextView title = (TextView) findViewById(R.id.details_date);
+		TextView titleTime = (TextView) findViewById(R.id.details_time);
 		Calendar cal = Calendar.getInstance();
 		Long milli = (long) (day) * 1000;
 		cal.setTimeInMillis(milli);
+		
+		Calendar endCal = Calendar.getInstance();
+		Long endMilli = (long) (end) * 1000;
+		endCal.setTimeInMillis(endMilli);
 
 		SimpleDateFormat format = new SimpleDateFormat("EEE d MMM yyyy");
-		String timeString = format.format(cal.getTime());
-		title.setText(timeString);
+		SimpleDateFormat formatTime = new SimpleDateFormat("h a");
+		String dateString = format.format(cal.getTime());
+		String timeString = formatTime.format(cal.getTime()) + " - " + formatTime.format(endCal.getTime());
+		title.setText(dateString);
+		titleTime.setText(timeString);
 
 		int calories = 0;
 		int intake = 0;

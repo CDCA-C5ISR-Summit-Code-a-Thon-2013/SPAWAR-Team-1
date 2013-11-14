@@ -20,6 +20,13 @@
             android:gravity="center"
             android:text="Date"
             android:textSize="24sp" />
+        <TextView
+            android:id="@+id/details_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Time"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TableLayout

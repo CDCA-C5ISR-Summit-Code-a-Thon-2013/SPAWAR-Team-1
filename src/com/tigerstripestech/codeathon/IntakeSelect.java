@@ -93,9 +93,11 @@ public class IntakeSelect extends Activity {
                 Intent intent = new Intent(getApplicationContext(), IntakeDetails.class);
                 int sTime = cursor.getInt(cursor.getColumnIndexOrThrow("hr"));
                 
-                int date = (sTime / 86400) * 86400;
+                int start = (sTime / 3600) * 3600;
+                int end = ((sTime / 3600) + 1) * 3600;
                 Bundle extras = new Bundle();
-                extras.putInt("date", date);
+                extras.putInt("date", start);
+                extras.putInt("end", end);
 
                 intent.putExtras(extras);
                 startActivity(intent);
