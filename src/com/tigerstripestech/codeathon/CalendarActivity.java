@@ -31,10 +31,6 @@ public class CalendarActivity extends Activity {
         CalendarView myCal = (CalendarView) findViewById(R.id.cal);
         _appPrefs = new AppPreferences(getBaseContext());
 		
-      	Log.d("CODEATHON", _appPrefs.getHeight());
-      	Log.d("CODEATHON", _appPrefs.getWeight());
-      	Log.d("CODEATHON", _appPrefs.getCaloricGoal());
-        
         myCal.setOnDateChangeListener(new OnDateChangeListener() {
 
             @Override
@@ -42,7 +38,6 @@ public class CalendarActivity extends Activity {
                     int dayOfMonth) {
             	
             	TextView focusTvDate = (TextView) findViewById(R.id.focusDate);
-            	//TextView focusTvCalories = (TextView) findViewById(R.id.focusCalories);
             	
             	//Format the date for display
             	GregorianCalendar date = new GregorianCalendar(year, month, dayOfMonth);
